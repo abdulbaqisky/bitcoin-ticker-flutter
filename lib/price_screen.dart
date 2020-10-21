@@ -58,21 +58,26 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   String selectedCurrency = 'USD';
+
+  List<DropdownMenuItem> getDropdownItem() {
+    List<DropdownMenuItem<String>> dropdownItems = [];
+    for (int i = 0; i < currenciesList.length; i++) {
+      String currency = currenciesList[i];
+      var newItem = DropdownMenuItem(
+        child: Text(currency),
+        value: currency,
+      );
+      dropdownItems.add(newItem);
+    }
+    return dropdownItems;
+  }
+
   List<String> dropdownValue = currenciesList;
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
         value: selectedCurrency,
-        items: [
-          DropdownMenuItem(
-            value: 'USD',
-            child: Text('USD'),
-          ),
-          DropdownMenuItem(
-            value: 'NGN',
-            child: Text('NGN'),
-          ),
-        ],
+        items: getDropdownItem(),
         onChanged: (value) {
           setState(() {
             selectedCurrency = value;
