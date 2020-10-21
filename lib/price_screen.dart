@@ -61,8 +61,7 @@ class _DropDownState extends State<DropDown> {
 
   List<DropdownMenuItem> getDropdownItem() {
     List<DropdownMenuItem<String>> dropdownItems = [];
-    for (int i = 0; i < currenciesList.length; i++) {
-      String currency = currenciesList[i];
+    for (String currency in currenciesList) {
       var newItem = DropdownMenuItem(
         child: Text(currency),
         value: currency,
