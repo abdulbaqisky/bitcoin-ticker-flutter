@@ -44,7 +44,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: CupertinoPick(),
+            child: iOSPicker(),
           ),
         ],
       ),
@@ -52,26 +52,19 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 }
 
-class CupertinoPick extends StatelessWidget {
-  List<Text> getPickerItems() {
-    List<Text> pickerItems = [];
-    for (String currency in currenciesList) {
-      pickerItems.add(Text(currency));
-    }
-
-    return pickerItems;
+CupertinoPicker iOSPicker() {
+  List<Text> pickerItems = [];
+  for (String currency in currenciesList) {
+    pickerItems.add(Text(currency));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPicker(
-      itemExtent: 32.0,
-      onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
-      },
-      children: getPickerItems(),
-    );
-  }
+  return CupertinoPicker(
+    itemExtent: 32.0,
+    onSelectedItemChanged: (selectedIndex) {
+      print(selectedIndex);
+    },
+    children: pickerItems,
+  );
 }
 
 class DropDown extends StatefulWidget {
@@ -82,7 +75,7 @@ class DropDown extends StatefulWidget {
 class _DropDownState extends State<DropDown> {
   String selectedCurrency = 'USD';
 
-  List<DropdownMenuItem> getDropdownItem() {
+  DropdownButton<String> getDropdownButton() {
     List<DropdownMenuItem<String>> dropdownItems = [];
     for (String currency in currenciesList) {
       var newItem = DropdownMenuItem(
@@ -91,19 +84,23 @@ class _DropDownState extends State<DropDown> {
       );
       dropdownItems.add(newItem);
     }
-    return dropdownItems;
+
+    return DropdownButton<String>(
+      value: selectedCurrency,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(
+          () {
+            selectedCurrency = value;
+          },
+        );
+      },
+    );
   }
 
   List<String> dropdownValue = currenciesList;
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-        value: selectedCurrency,
-        items: getDropdownItem(),
-        onChanged: (value) {
-          setState(() {
-            selectedCurrency = value;
-          });
-        });
+    return null;
   }
 }
