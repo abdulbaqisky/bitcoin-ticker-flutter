@@ -44,20 +44,32 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: CupertinoPicker(
-              itemExtent: 32.0,
-              onSelectedItemChanged: (selectedIndex) {
-                print(selectedIndex);
-              },
-              children: [
-                Text('USD'),
-                Text('NGN'),
-                Text('GBP'),
-              ],
-            ),
+            child: CupertinoPick(),
           ),
         ],
       ),
+    );
+  }
+}
+
+class CupertinoPick extends StatelessWidget {
+  List<Text> getPickerItems() {
+    List<Text> pickerItems = [];
+    for (String currency in currenciesList) {
+      pickerItems.add(Text(currency));
+    }
+
+    return pickerItems;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPicker(
+      itemExtent: 32.0,
+      onSelectedItemChanged: (selectedIndex) {
+        print(selectedIndex);
+      },
+      children: getPickerItems(),
     );
   }
 }
