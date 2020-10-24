@@ -46,4 +46,28 @@ class CoinData {
       print(response.statusCode);
     }
   }
+
+  Future getLTCData() async {
+    String requestURL = '$coinAPIURL/LTC/USD?apikey=$apiKey';
+    http.Response response = await http.get(requestURL);
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      var lastPrice = decodedData['rate'];
+      return lastPrice;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future getETHData() async {
+    String requestURL = '$coinAPIURL/ETH/USD?apikey=$apiKey';
+    http.Response response = await http.get(requestURL);
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      var lastPrice = decodedData['rate'];
+      return lastPrice;
+    } else {
+      print(response.statusCode);
+    }
+  }
 }
