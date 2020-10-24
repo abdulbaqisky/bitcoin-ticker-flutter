@@ -81,7 +81,6 @@ class _PriceScreenState extends State<PriceScreen> {
         title: Text('🤑 Coin Ticker'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Padding(
@@ -147,12 +146,15 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
           ),
-          Container(
-              height: 150.0,
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(bottom: 30.0),
-              color: Colors.lightBlue,
-              child: Platform.isIOS ? iOSPicker() : androidDropdown()),
+          Padding(
+            padding: EdgeInsets.only(top: 330.7),
+            child: Container(
+                height: 150.0,
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(bottom: 30.0),
+                color: Colors.lightBlue,
+                child: Platform.isIOS ? iOSPicker() : androidDropdown()),
+          ),
         ],
       ),
     );
